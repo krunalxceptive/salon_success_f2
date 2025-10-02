@@ -15,6 +15,8 @@ export function useAuth() {
     retry: false,
   });
 
+  
+
   const hasAccess = user && (
     user.subscriptionStatus === 'active' || 
     (user.subscriptionStatus === 'free_access' && user.subscriptionEndDate && new Date() <= new Date(user.subscriptionEndDate))

@@ -10,7 +10,7 @@ async function throwIfResNotOk(res: Response) {
 export async function apiRequest(
   method: string,
   url: string,
-  data?: unknown | undefined,
+  data?: unknown | undefined
 ): Promise<Response> {
   const res = await fetch(url, {
     method,
@@ -30,21 +30,21 @@ export const getQueryFn: <T>(options: {
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
     let url = queryKey[0] as string;
-    
+
     // Handle query parameters if additional items in queryKey
     if (queryKey.length > 1 && queryKey[1] !== undefined) {
       const searchParams = new URLSearchParams();
-      
+
       // Handle different parameter types based on the endpoint
-      if (url.includes('/income-goals')) {
-        searchParams.append('businessId', queryKey[1] as string);
-      } else if (url.includes('/money-pots')) {
-        searchParams.append('businessId', queryKey[1] as string);
+      if (url.includes("/income-goals")) {
+        searchParams.append("businessId", queryKey[1] as string);
+      } else if (url.includes("/money-pots")) {
+        searchParams.append("businessId", queryKey[1] as string);
       }
-      
+
       url += `?${searchParams.toString()}`;
     }
-    
+
     const res = await fetch(url, {
       credentials: "include",
     });
